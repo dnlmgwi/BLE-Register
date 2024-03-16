@@ -2,7 +2,8 @@
 	import { invalidate } from '$app/navigation';
 	import { onMount } from 'svelte';
 	import { derived, writable } from 'svelte/store';
-
+	import { PUBLIC_SITEKEY } from '$env/static/public';
+	import '../app.css';
 	export let data;
 
 	$: ({ supabase, session } = data);
@@ -29,5 +30,10 @@
 		return supabaseAuthStateChangeSubscriptionStore.subscribe(() => {});
 	});
 </script>
+
+<svelte:head>
+	<script async defer src="https://www.google.com/recaptcha/api.js?render={PUBLIC_SITEKEY}">
+	</script>
+</svelte:head>
 
 <slot />
