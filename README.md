@@ -1,12 +1,26 @@
-# Sveltekit + Supabase Auth Starter
+# IoT BLE Attendance Register
+
+An IoT BLE Attendance Register using Xiao ESP32C3 BLE and SvelteKit PWA.
+
+Experimenting with the [Web Bluetooth API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Bluetooth_API) to provide the ability to connect and interact with Bluetooth Low Energy via the Browser.
+
+## Technologies Used
+
+![Svelte](https://img.shields.io/badge/svelte-%23f1413d.svg?style=for-the-badge&logo=svelte&logoColor=white)
+![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
+![Bluetooth](https://img.shields.io/badge/bluetooth-%230082FC.svg?style=for-the-badge&logo=bluetooth&logoColor=white)
+
+## Sveltekit + Supabase Auth Starter
 
 This is a starter template for [SvelteKit](https://kit.svelte.dev) apps with
 [Supabase](https://supabase.io) authentication. Uses the new Supabase SSR libraries rather than the
 deprecated auth helpers.
 
+Forked From <https://github.com/fnimick/sveltekit-supabase-auth-starter> 
+
 ## Running locally
 
-- Install the supabase cli: (https://supabase.com/docs/guides/cli/getting-started)
+- Install the supabase cli: (<https://supabase.com/docs/guides/cli/getting-started>)
 - Copy `.env.example` to `.env`
 - Start supabase services in your project directory: `supabase start`
 - Update the values for `PUBLIC_SUPABASE_URL` and `PUBLIC_SUPABASE_ANON_KEY` with the values from
@@ -15,13 +29,13 @@ deprecated auth helpers.
 
 ## Demonstration
 
-- Navigate to the dev server at (http://localhost:5173)
+- Navigate to the dev server at (<http://localhost:5173>)
 - Either navigate to the protected route, or click 'sign in'. Either will bring you to the login
   page. (NOTE: you may experience a reload in development only when the supabase auth helper
   dependency is re-optimized by vite - this does not occur in production builds.)
 - In the login page, enter a test email.
 - Supabase sends email events in development to a locally hosted mail service at
-  (http://localhost:54324/monitor). Click the link in the test email to log in.
+  (<http://localhost:54324/monitor>). Click the link in the test email to log in.
 
 ## How it works
 
