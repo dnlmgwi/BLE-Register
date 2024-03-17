@@ -31,9 +31,4 @@
 	});
 </script>
 
-<svelte:head>
-	<script async defer src="https://www.google.com/recaptcha/api.js?render={PUBLIC_SITEKEY}">
-	</script>
-</svelte:head>
-
 <slot />

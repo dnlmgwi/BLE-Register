@@ -7,9 +7,43 @@
 	import BleStatus from '$lib/components/BLEStatus.svelte';
 	import { checkedInStore, triggerReset } from '$lib/stores/checkedInStores';
 	import { registerSchema } from '$lib/schemas/registerSchema';
-	import { goto } from '$app/navigation';
+	import { DiplomaClass } from '$lib/utils/geofencing.js';
+	import recaptchaEnhance from 'svelte-recaptcha-enhance';
+	import { PUBLIC_SITEKEY } from '$env/static/public';
 
 	export let data: PageData;
+
+	//Geo Fencing v0
+	$: lat = 0;
+	$: long = 0;
+
+	let isOnCampus = 'Loading...';
+
+	function success(position: any) {
+		lat = position.coords.latitude;
+		long = position.coords.longitude;
+
+		if (DiplomaClass.inside(lat, long)) {
+			isOnCampus = 'Yes You Are';
+		} else {
+			isOnCampus = 'Not Yet';
+		}
+	}
+
+	function error() {
+		toast.error('Sorry, no position available.');
+	}
+
+	const options = {
+		enableHighAccuracy: true,
+		maximumAge: 5000,
+		timeout: 7000
+	};
+
+	onMount(() => {
+		// Watch Live Location
+		navigator.geolocation.watchPosition(success, error, options);
+	});
 
 	let device: unknown;
 
@@ -70,11 +104,16 @@
 	};
 </script>
 
-<h1>Welcome to SvelteKit + Supabase</h1>
-
 <main>
 	<Toaster />
 	<div class="flex flex-col items-center justify-center min-h-screen">
+		<p class="mt-1 text-center font-medium leading-6 text-blue-500 pt-10">Are you on campus?</p>
+		<p class="mt-1 text-center text-sm leading-6 text-blue-300">
+			Lat: {lat}, Long: {long}
+		</p>
+		<p class="mt-1 text-center text-sm leading-6 text-blue-300">
+			{isOnCampus}
+		</p>
 		<div>
 			{#if session != null}
 				<div class="flex flex-row items-center gap-2">
@@ -135,6 +174,7 @@
 				>
 					Check In</button
 				>
+
 				{#if session != null}
 					<p>
 						<a href="protected/profile" class="text-base font-semibold leading-7 text-blue-600"
